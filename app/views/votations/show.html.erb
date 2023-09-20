@@ -1,0 +1,123 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success" role="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+<% unless alert.nil? %>
+  <div class="alert alert-warning" role="alert">
+    <p id="alert"><%= alert %></p>
+  </div>
+<% end %>
+
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to 'Votaciones', votations_path %></li>
+      <li class="breadcrumb-item active" aria-current="page">Votacion</li>
+    </ol>
+  </nav>
+  <div class="row vdivide">
+    <div class="col-sm">
+      <h1> <%= @votation.name.capitalize %></h1> 
+      <p> Descripción: <%= @votation.description %> </p>
+      <div class="col-xs-12" style="height:10px;"></div>
+        <div class = "text-center">
+        <img src=<%= @votation.imgpath %>  alt="Logo" style=" height: 100%; width: 100%; max-height: 250px; max-width: 250px;">
+        </div>
+      <div class="col-xs-12" style="height:10px;"></div>
+      <%= form_with(model: @votation.subscriptions.build, local: true) do |form| %>
+        <%= form.hidden_field :votation_id, id: :subscription_votation_id %>
+        <div class="actions">
+          <% if @votation.owner != current_user %>
+            <%= form.submit current_user.subscriptions.where(votation: @votation).count <= 0 ? 'Suscribirse' : 'Desuscribirse'  %>
+          <% end %>  
+        </div>
+        <div class="col-xs-12" style="height:10px;"></div>
+        <% if current_user == @votation.owner %>
+          <%= link_to 'Configurar', edit_votation_path(@votation) %>|
+        <% end %>
+        <%= link_to 'Volver', votations_path %>
+        <div class="col-xs-12" style="height:10px;"></div>
+      <% end %>
+    </div>
+    <div class = "col-sm">
+      <h2>Opciones: </h2>
+        <%= form_with(model: @votation.votes.find_or_create_by(voter: current_user), local: true) do |form| %>
+          <% if @votation.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@votation.errors.count, "error") %> No se pudo guardar su voto:</h2>
+      
+              <ul>
+                <% @votation.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+    
+          <%= form.hidden_field :votation_id %>
+    
+          <div class="field">
+            <% @votation.options.each do |option| %>
+              <ul>
+                <% if @votation.started? %>
+                  <%= form.radio_button(:votation_option_id, option.id) %> 
+                <% end %>
+                <%=option.name%>
+              </ul>
+            <% end %>
+          </div>
+          <% if @votation.started? %>    
+            <div class="actions">
+              <%= form.submit 'Votar' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class = "row">
+    <div class = "col-sm">
+      <div class="alert alert-success" role="alert">
+        Resultados de la votacion:
+        <% if @votation.votes.count > 0 %>
+          <%= pie_chart @votation.data_for_piechart %>
+        <% else %>
+          No hay votos que contar.
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% @votation.comments.each do |comment| %>
+    <hr>
+    <%= render 'comment_form', comment: comment %>
+  <% end %>
+  <hr>
+  <% if @votation.started?%>
+    <%= form_with(model: @votation, local: true) do |form| %>
+      <% if @votation.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@votation.errors.count, "error") %> prohibited this votation from being saved:</h2>
+      
+          <ul>
+            <% @votation.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <%= form.fields_for :comments, @votation.comments.build do |fc| %>
+        <%= fc.label :"Contenido", id: :votation_comment_content %>
+        <%= fc.text_field :content, id: :votation_comment_content %>
+      <% end %>
+
+      <div class="actions">
+        <%= form.submit 'Comentar' %>
+      </div>
+    <% end %>
+  <% end %>
+    
+
+</div>

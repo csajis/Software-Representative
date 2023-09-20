@@ -1,0 +1,41 @@
+<% disabled = !(votation.created? || votation.published?) %>
+<%= form_with(model: votation, local: true) do |form| %>
+  <div class= "row">
+    <div class= "col-sm">
+      <% if votation.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-warning" role="alert">
+            <ul>
+            <% votation.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name, 'Nombre' %>
+    <%= form.text_field :name, id: :votation_name, class: 'form-control', disabled: disabled %>
+  </div>
+  <div class="form-group">
+    <%= form.label :description, 'Descripción' %>
+    <%= form.text_area :description, id: :votation_description, class: 'form-control', disabled: disabled %>
+  </div>
+    
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <% if votation.unsaved? %>
+    <div class="actions">
+      <%= form.submit "Crear Votación", :name => "BotonCrear", class: 'btn btn-primary btn-lg btn-bloc', disabled: disabled %>
+    </div>
+  <% end %>
+
+  <% if votation.created? or votation.published? %>
+    <div class="actions">
+      <%= form.submit "Modificar Votación", :name => "BotonCrear", class: 'btn btn-primary btn-lg btn-bloc', disabled: disabled %>
+    </div>
+  <% end %>
+<% end %>

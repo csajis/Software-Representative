@@ -1,0 +1,22 @@
+<div class="container-fluid">
+
+  <% if current_user.type == "Voter" %>
+    <div class="row ">
+      <div class="col-sm">
+        <div class = "text-center">
+          <h1>Nueva Votación</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-sm"> </div>
+      <div class="col-sm"> <%= render 'form', votation: @votation %> </div>
+      <div class="col-sm"> </div>
+    </div>
+
+  <% else %>
+    <h1>Solo votantes pueden crear una votación, <%= link_to 'Volver', votations_path %></h1>
+  <% end %>
+
+</div>

@@ -1,0 +1,51 @@
+
+<% unless notice.nil? %>
+<div class="alert alert-success" role="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+<% unless alert.nil? %>
+<div class="alert alert-warning" role="alert">
+  <p id="alert"><%= alert %></p>
+</div>
+<% end %>
+<div class = "container">
+<div class = "row vdivide">
+<div class = "col-sm">
+  <h1> <%= @votation.name %> </h1> 
+  <p> Descripción: <%= @votation.description %> </p>
+  <div class="col-xs-12" style="height:10px;"></div>
+    <div class = "text-center">
+    <img src=<%= @votation.imgpath %>  alt="Logo" style=" height: 100%; width: 100%; max-height: 250px; max-width: 250px;">
+    </div>
+  <div class="col-xs-12" style="height:10px;"></div>
+    <div class="col-xs-12" style="height:10px;"></div>
+    <%= link_to 'Volver', votations_public_path %>
+    <div class="col-xs-12" style="height:10px;"></div>
+</div>
+<div class = "col-sm">
+  <h2>Opciones: </h2>
+
+      <div class="field">
+        <% @votation.options.each do |option| %>
+          <ul>
+            <li><%=option.name%></li>
+          </ul>
+        <% end %>
+      </div>
+  </div>
+</div>
+<hr>
+</div>
+<div class = "row">
+<div class = "col-sm">
+  <div class="alert alert-success" role="alert">
+    <%= pie_chart @votation.data_for_piechart %>
+  </div>
+</div>
+</div>
+<% @votation.comments.each do |comment| %>
+<hr>
+<%= render 'comment_form', comment: comment %>
+<% end %>
+<hr>

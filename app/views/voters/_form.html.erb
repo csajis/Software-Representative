@@ -1,0 +1,86 @@
+<%= form_with(model: voter, local: true) do |form| %>
+  
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class= "row">
+    <div class= "col-sm">
+      <% if voter.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-warning" role="alert">
+            <ul>
+            <% voter.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class= "row">
+    <div class="field">
+      <div class = "container-fluid">
+        <div class= "row">
+          <div class= "col-6">
+            <%= form.label :"Primer nombre" %>
+          </div>
+          <div class= "col-sm">
+            <%= form.text_field :FirstName, id: :voter_FirstName %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class= "row">
+    <div class="field">
+      <div class = "container-fluid">
+        <div class= "row">
+          <div class= "col-6"> <%= form.label :"Otros nombres" %> </div>
+          <div class= "col-sm">  <%= form.text_field :MiddleName, id: :voter_MiddleName %> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+  
+  <div class= "row">
+    <div class="field">
+      <div class = "container-fluid">
+        <div class= "row">
+          <div class= "col-6"> <%= form.label :"Apellido paterno" %> </div>
+          <div class= "col-sm">  <%= form.text_field :LastName, id: :voter_LastName %> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class= "row">
+    <div class="field">
+      <div class = "container-fluid">
+        <div class= "row">
+          <div class= "col-6"> <%= form.label :"Apellido Materno" %> </div>
+          <div class= "col-sm">  <%= form.text_field :SecondLastName, id: :voter_SecondLastName %> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <div class="actions">
+    <%= form.submit 'Confirmar Cambios' %>
+  </div>
+  <%= link_to 'Volver', @voter %>
+
+<% end %>

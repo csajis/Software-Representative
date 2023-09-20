@@ -1,0 +1,158 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Votaciones</a></li>
+    <li class="breadcrumb-item"><a href="#">Votacion</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+  </ol>
+</nav>
+<% unless @votation.deleted? or @votation.moderated? %>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm">
+        <div class = "text-center">
+          <h1>Editando Votación</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm"> </div>
+      <div class="col-sm">
+
+        <div class="row">
+          <div class="col-sm">
+            <%if flash.any?%>
+              <div class="alert alert-success" role="alert">
+                <p id="notice"><%= notice %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-sm">
+             <%= render 'form', votation: @votation %>
+            
+          </div>
+        </div>
+        
+        <% if @votation.created? or @votation.published? %>
+
+          <%= form_with(model: @votation, local: true) do |form| %>
+            <div class="row">
+              <div class="col-sm">
+                <h3>Opciones de la votación: </h3>
+                  <% if @votation.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@votation.errors.count, "error") %> No se puedo guardar la opción</h2>
+                
+                      <ul>
+                      <% @votation.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+
+                    </div>
+                  <% end %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm">
+                <div class="field">
+                  <% @votation.options.each do |option| %>
+                    <div class="row">
+                      <div class="col-sm">
+                        <ul>
+                          <li> <%= option.name %> </li>
+                        </ul>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="col-sm">
+                <% if @votation.created? or @votation.published?%>
+                  <% @votation.options.each do |option| %>
+                    <div class="row">
+                      <div class="col-sm">
+                        <ul>
+                          <%= link_to 'Eliminar', option, method: :delete, data: { confirm: '¿Estas seguro?' } %>
+                        </ul>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+              <%= form.fields_for :options, @votation.options.build do |fc| %>
+
+                <div class="col-sm"> <%= fc.label :"Nueva opción", id: :votation_option_name %> </div>
+
+                <div class="col-sm"> <%= fc.text_field :name, id: :votation_option_name %></div>
+
+              <% end %>
+              <div class="col-sm">
+                <div class="actions">
+                  <%= form.submit "Crear", :name => "BtnCrearop", class: 'btn btn-primary btn-bloc' %>
+                </div>
+              </div>
+              
+            </div>
+
+          <% end %>
+        <% else %>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="alert alert-warning" role="alert">
+            No es posible editar opciones cuando la votacion ya a comenzado
+          </div>
+        <% end %>  
+        <div class="col-xs-12" style="height:10px;"></div>
+        <div class="row">
+          <div class="col-sm">
+          <% if @votation.may_create? %> 
+              <%= link_to 'Ocultar Votación',  hide_path, method: 'post', class: "btn btn-sm btn-success" %>
+            <% end %>
+            <% if @votation.may_publish? %> 
+              <%= link_to 'Publicar Votación',  publish_path, method: 'post', class: "btn btn-sm btn-success" %>
+            <% end %>
+            <% if @votation.may_start? and @votation.options.size > 1%> 
+              <%= link_to 'Comenzar Votación',  start_path, method: 'post', class: "btn btn-sm btn-success" %>
+            <% end %>
+            <% if @votation.may_end? %> 
+              <%= link_to 'Finalizar Votación',  end_path, method: 'post', data: { confirm: '¿Estas seguro?'}, class: "btn btn-sm btn-warning" %>
+            <% end %>
+            <% if @votation.may_delete? %> 
+              <%= link_to 'Eliminar Votación',@votation,method: :delete, data: { confirm: '¿Estas seguro?'}, class: "btn btn-sm btn-danger" %>
+            <% end %>
+
+          </div>
+        </div>
+
+        <div class="col-xs-12" style="height:10px;"></div>
+
+        <div class="row">
+          <div class="col-sm">
+            <%= link_to 'Volver', @votation , class: "btn btn-sm btn-success" %>
+            <%= link_to 'Ir al Dashboard', votations_path , class: "btn btn-sm btn-success" %>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm"> </div>
+    </div>
+  </div>
+<% else %>
+  <div class = "text-center">
+    <h1> No es posible editar la Votación<h1>
+    <%= link_to 'Volver', @votation , class: "btn btn-sm btn-success" %>
+<% end %>
+
+
+
+
+

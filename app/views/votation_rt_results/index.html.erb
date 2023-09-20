@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Votation Rt Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Votation</th>
+      <th>Temporal result</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @votation_rt_results.each do |votation_rt_result| %>
+      <tr>
+        <td><%= votation_rt_result.votation %></td>
+        <td><%= votation_rt_result.temporal_result %></td>
+        <td><%= link_to 'Show', votation_rt_result %></td>
+        <td><%= link_to 'Edit', edit_votation_rt_result_path(votation_rt_result) %></td>
+        <td><%= link_to 'Destroy', votation_rt_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Votation Rt Result', new_votation_rt_result_path %>

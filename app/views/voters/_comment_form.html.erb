@@ -1,0 +1,31 @@
+  <div class = "col-sm">
+    <div class="panel panel-white post panel-shadow">
+      <div class="post-heading">
+        <div class="pull-left image">
+          <img src= <%= comment.voter.imgpath %> class="img-circle avatar" "alt=Perfil">
+        </div>
+        <div class="pull-left meta">
+          <div class="title h5">
+            <b><%=
+            if comment.voter.FirstName.blank?
+              "Anónimo"
+            else 
+              comment.voter.FirstName
+            end
+            %>
+            </b>comentó en <%= comment.votation.name %>.
+          </div>
+        </div>
+      </div> 
+      <div class="post-description"> 
+        <p><%= comment.content %></p>
+        <div class="stats">
+          <h6 class="text-muted time"><small>Fecha creación: <%= comment.created_at %></small> </h6>
+          <h6 class="text-muted time"><small>Ultima actualización: <%= comment.updated_at %></small> </h6>
+          <% if current_user == comment.voter%>
+            <h6 class="text-muted time"><small><%= link_to 'Editar', edit_comment_path(comment) %>  | <%= link_to 'Eliminar', comment, method: :delete, data: { confirm: 'Estas Seguro?' } %> </small> </h6>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

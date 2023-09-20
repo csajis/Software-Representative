@@ -1,0 +1,17 @@
+<div class="card-columns">
+<% votations.each do |votation| %>
+  <%if votation.started? or votation.ended? or votation.published?%>
+    <%= link_to public_show_path(votation), class: 'deco-none' do %>
+      <div class="card">
+        <img class="card-img-top" data-src=<%= votation.imgpath %> alt="Votation State" src=<%= votation.imgpath %> data-holder-rendered="true" style="height: 160px; width: 100%; display: block;">
+        <div class="card-body">
+          <h5 class="card-title"><%= truncate(votation.name, length: 25) %></h5>
+          <p class="card-text"><%= truncate(votation.description, length: 100)%></p>
+          <br>
+            
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+</div> 

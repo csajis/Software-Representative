@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'searchform' %>
+
+
+
+<h1>Usuarios:</h1>
+email
+type
+<% if @users.size > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>e-mail</th>
+        <th>type</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @votations.each do |votation| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.type %></td>
+          <td><%= link_to 'Show', user %></td>
+          <%if user.email == current_user.email%>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h1>No se encuentran coincidencias</h1>
+<% end %>
+<br>
+
+<%= link_to 'New User', new_user_path %>

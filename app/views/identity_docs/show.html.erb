@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Run:</strong>
+  <%= @identity_doc.run %>
+</p>
+
+<p>
+  <strong>Doc type:</strong>
+  <%= @identity_doc.doc_type %>
+</p>
+
+<p>
+  <strong>Doc number:</strong>
+  <%= @identity_doc.doc_number %>
+</p>
+
+<%= link_to 'Edit', edit_identity_doc_path(@identity_doc) %> |
+<%= link_to 'Back', identity_docs_path %>

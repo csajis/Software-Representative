@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-sm">
+    <div class="text-center">
+      <img src= <%= voter.imgpath %> class="rounded" alt="Perfil" style=" height: 100%; width: 100%; max-height: 250px; max-width: 250px;">
+    </div>
+  </div>
+  <div class="col-sm">
+      <dl class="row">
+        <dt class="col-sm-3">Nombres</dt>
+        <dd class="col-sm-9"> <%= render 'name_form', name: voter.FirstName %> <span class="tab-space"> <%= render 'name_form', name: voter.MiddleName %> </span> </dd>
+        <div class="col-xs-12" style="height:35px;"></div>
+        <dt class="col-sm-3">Apellidos</dt>
+        <dd class="col-sm-9"> <%= render 'name_form', name: voter.LastName %> <span class="tab-space"> <%= render 'name_form', name: voter.SecondLastName %> </span></dd>
+        <div class="col-xs-12" style="height:35px;"></div>
+        <dt class="col-sm-3">RUT</dt>
+        <dd class="col-sm-9"> (Aqui Va el RUT)
+        <dt class="col-sm-3">E-Mail</dt>
+        <dd class="col-sm-9"> <%= voter.email %> </dd>
+        <div class="col-xs-12" style="height:35px;"></div>
+        <dt class="col-sm-5">Fecha de nacimiento</dt> 
+        <dd class="col-sm-13"> <%= voter.BirthDate %> </dd>
+        <% if voter.validated_doc? %>
+          <dt class="col-sm-10">Usuario validado</dt> 
+        <% end %>
+      </dl>
+      
+  </div>
+</div>
+<hr>
+<div class="row">
+<div class="col-sm">
+  <div class="col-xs-12" style="height:50px;"></div>
+  <div class="text-center">
+    <h1><dt class>Comentarios Recientes</dt><h1>
+  </div>
+  <%unless voter.comments.blank?%>
+    <% voter.comments.reverse.take(3).each do |comment| %>
+      <% unless comment.votation.state == ("deleted" or "moderated") %>
+        <%= render 'comment_form', comment: comment %>    
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="col-xs-12" style="height:50px;"></div>
+    <h2><dt class>No se encontraron Comentarios</dt><h2>
+  <% end %>
+</div>

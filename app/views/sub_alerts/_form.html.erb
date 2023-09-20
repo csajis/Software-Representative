@@ -1,0 +1,27 @@
+<%= form_with(model: sub_alert, local: true) do |form| %>
+  <% if sub_alert.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sub_alert.errors.count, "error") %> prohibited this sub_alert from being saved:</h2>
+
+      <ul>
+      <% sub_alert.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :notification_id %>
+    <%= form.text_field :notification_id, id: :sub_alert_notification_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subscription_id %>
+    <%= form.text_field :subscription_id, id: :sub_alert_subscription_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

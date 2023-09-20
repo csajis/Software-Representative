@@ -1,0 +1,84 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="text-center">
+        <h2><dt class>Bienvenido a Representative!</dt><h2>
+      </div>
+      <li>Una vez creada tu cuenta podras:
+        <ul>
+          <li>Crear Votaciones</li>
+          <li>Participar en votaciones como un votante</li>
+          <li>Dejar comentarios en las votaciones</li>
+          <li>y muchos mas!</li>
+        </ul>
+      </li>
+      <li><%= render "users/shared/links" %></li>
+      <div class="col-xs-12" style="height:50px;"></div>
+      <div class="text-center">
+        <img src="/images/logorepresentative.png" class="rounded" alt="Logo" style=" height: 100%; width: 100%; max-height: 250px; max-width: 250px;">
+      </div> 
+    </div>
+    <div class="col-sm">
+    </div>
+    <span class="border border-dark">
+      <div class="col-sm">
+        <h2>Crea una cuenta</h2>
+      
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :email,"Correo" %><br />
+            <%= f.email_field :email, autofocus: true,placeholder: "Crea una Cuenta", autocomplete: "email" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :firstname,"Nombre" %><br />
+            <%= f.text_field :FirstName, autofocus: true,placeholder: "Primer nombre", autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :middlename,"Segundo/Otros Nombre(s)" %><br />
+            <%= f.text_field :MiddleName, autofocus: true,placeholder: "Otros nombres", autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :lastname,"Apellido Paterno" %><br />
+            <%= f.text_field :LastName, autofocus: true, autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :secondlastname,"Apellido Materno" %><br />
+            <%= f.text_field :SecondLastName, autofocus: true, autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :BirthDate,"Fecha de nacimiento" %><br />
+            <%= f.date_select :BirthDate,start_year: 1950,end_year: Date.today.year, autofocus: true, autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :password,"Contraseña"%>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> caracteres minimo)</em>
+            <% end %><br />
+            <%= f.password_field :password,placeholder: "Ingrese contraseña", autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:10px;"></div>
+          <div class="field">
+            <%= f.label :password_confirmation,"Confirme Contraseña" %><br />
+            <%= f.password_field :password_confirmation,placeholder: "Confirme contraseña", autocomplete: "off" %>
+          </div>
+          <div class="col-xs-12" style="height:25px;"></div>
+          <div class="actions">
+            <%= f.submit "Registrate" %>
+          </div>
+          <div class="col-xs-12" style="height:25px;"></div>
+        <% end %>
+      </div>
+    </span>
+  </div>
+</div>
+

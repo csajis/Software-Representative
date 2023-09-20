@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notification:</strong>
+  <%= @sub_alert.notification %>
+</p>
+
+<p>
+  <strong>Subscription:</strong>
+  <%= @sub_alert.subscription %>
+</p>
+
+<%= link_to 'Edit', edit_sub_alert_path(@sub_alert) %> |
+<%= link_to 'Back', sub_alerts_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+votation_one:
+  name: MyString
+  description: MyText
+  enabled: false
+  owner_id: 5
+
+votation_two:
+  name: MyString
+  description: MyText
+  enabled: false
+  owner_id: 6

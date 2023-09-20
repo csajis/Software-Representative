@@ -1,0 +1,32 @@
+<%= form_with(model: identity_doc, local: true) do |form| %>
+  <% if identity_doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(identity_doc.errors.count, "error") %> prohibited this identity_doc from being saved:</h2>
+
+      <ul>
+      <% identity_doc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :run %>
+    <%= form.text_field :run, id: :identity_doc_run %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doc_type %>
+    <%= form.text_field :doc_type, id: :identity_doc_doc_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doc_number %>
+    <%= form.text_field :doc_number, id: :identity_doc_doc_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

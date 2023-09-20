@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+
+
+
+
+<h1>Lista de Votantes</h1>
+
+
+
+<table class = "table">
+  <thead class = "thead-dark">
+    <tr>
+      <th scope="col">Nombres</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Fecha Nacimiento</th>
+      <th scope="col">E-Mail</th>
+      <% @voters.each do |voter| %>
+        <% nothing = "N/A" %>
+        <tr bgcolor="#ffffff">
+
+          <% unless voter.FirstName.blank? 
+           tempName = voter.FirstName    
+           else 
+           tempName = nothing 
+           end 
+           unless voter.MiddleName.blank? 
+               tempMidName = voter.MiddleName 
+           else 
+               tempMidName = nothing 
+           end %>
+          <td><%= tempName + ", " + tempMidName%> </td>
+
+          <% unless voter.LastName.blank? 
+           tempLastName = voter.LastName    
+           else 
+           tempLastName = nothing 
+           end 
+           unless voter.SecondLastName.blank? 
+               tempSecondLastName = voter.SecondLastName 
+           else 
+               tempSecondLastName = nothing 
+           end %>
+          <td><%= tempLastName + ", " + tempSecondLastName%> </td>
+
+
+
+          <% 
+             unless voter.BirthDate.blank?
+              tempDate = voter.BirthDate
+              else
+              tempDate = nothing
+            end
+          %>
+
+          <td><%= tempDate %></td>
+
+          <% 
+             unless voter.email.blank?
+              tempEmail = voter.email
+              else
+              tempEmail = nothing
+            end
+          %>
+
+
+          <td><%= tempEmail %></td>
+          <td><%= link_to 'Mostrar', voter %></td>
+
+
+
+      
+      <% end %>
+  </thead>
+</table>
+
+<%= render 'search_form' %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+  <a class="navbar-brand" href="#">Votaciones</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample09">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    
+    <ul class="navbar-nav px-3">
+      <% if current_user.type == "Voter" %>
+        <li class="nav-item text-nowrap">
+          <%= link_to 'Nueva Votacion', new_votation_path, class: "nav-link btn btn-primary" %>
+        </li>
+      <% end %>
+    </ul>
+    <%= render 'search_form' %>
+  </div>
+</nav>
+
+<%= render 'votation_cards', votations: @votations %>

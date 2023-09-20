@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Votation:</strong>
+  <%= @votation_rt_result.votation %>
+</p>
+
+<p>
+  <strong>Temporal result:</strong>
+  <%= @votation_rt_result.temporal_result %>
+</p>
+
+<%= link_to 'Edit', edit_votation_rt_result_path(@votation_rt_result) %> |
+<%= link_to 'Back', votation_rt_results_path %>

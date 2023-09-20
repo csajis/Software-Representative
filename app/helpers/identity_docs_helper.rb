@@ -1,0 +1,2 @@
+module IdentityDocsHelper
+end

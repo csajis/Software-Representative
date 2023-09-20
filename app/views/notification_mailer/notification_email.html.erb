@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hola, <%= @voter.FirstName %></h1>
+    <p>
+      La votacion <strong><%= @votation.name %></strong>, ha finalizado.
+    </p>
+    <p>Los resultados fueron :</p>
+      <ul> 
+        <% @votation.votation_result.final_result.each do |v,k| %>
+          <li>  <%= v %> : <%= k %> votos
+        <% end %> 
+      </ul>
+    <p>La opción ganadora fue: </p> 
+    <% winner = @votation.votation_result.final_result.max_by{|k,v| v} %>
+          <ul><li> <%= winner[0] %>  con <%= winner[1]%> votos! </ul>
+
+    Pincha <strong> <%= link_to 'Aqui', @votation, class: "nav-link" %> </strong> para ver mas
+  </body>
+</html>

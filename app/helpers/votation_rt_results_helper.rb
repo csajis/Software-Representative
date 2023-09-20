@@ -1,0 +1,2 @@
+module VotationRtResultsHelper
+end

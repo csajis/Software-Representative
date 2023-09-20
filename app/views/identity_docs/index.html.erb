@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Identity Docs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Run</th>
+      <th>Doc type</th>
+      <th>Doc number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @identity_docs.each do |identity_doc| %>
+      <tr>
+        <td><%= identity_doc.run %></td>
+        <td><%= identity_doc.doc_type %></td>
+        <td><%= identity_doc.doc_number %></td>
+        <td><%= link_to 'Show', identity_doc %></td>
+        <td><%= link_to 'Edit', edit_identity_doc_path(identity_doc) %></td>
+        <td><%= link_to 'Destroy', identity_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Identity Doc', new_identity_doc_path %>

@@ -1,0 +1,10 @@
+<div class="text-center">
+<p class="mb-0"><h1>Perfil De Administrador</h1></p>
+</div>
+
+
+<div class="container">
+  <%= render 'profile_form', admin: @admin %>
+</div>
+<%= link_to 'Edit', edit_admin_path(@admin) %> |
+<%= link_to 'Back', admins_path %>
